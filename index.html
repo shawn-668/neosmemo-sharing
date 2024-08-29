@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeosMemo Commands</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>NeosMemo Commands</h1>
+
+<h2>Navigate to Script directory:</h2>
+<pre id="command1">cd C:/Users/epuser/Desktop/Script
+ls</pre>
+<button onclick="copyToClipboard('cd C:/Users/epuser/Desktop/Script\nls')">Copy</button>
+
+<h2>Activate the virtual environment:</h2>
+<pre id="command2">.\myenv\Scripts\Activate</pre>
+<button onclick="copyToClipboard('.\\myenv\\Scripts\\Activate')">Copy</button>
+
+<h2>Login to OpenMaint server:</h2>
+<pre id="command3">ssh epadmin@192.168.9.232
+Ep492033</pre>
+<button onclick="copyToClipboard('ssh epadmin@192.168.9.232\nEp492033')">Copy</button>
+
+<h2>Continue to Docker:</h2>
+<pre id="command4">sudo docker exec -it 825bb6beb037 bash
+Ep492033</pre>
+<button onclick="copyToClipboard('sudo docker exec -it 825bb6beb037 bash\nEp492033')">Copy</button>
+
+<h2>Continue to psql:</h2>
+<pre id="command5">psql -U postgres -d openmaint</pre>
+<button onclick="copyToClipboard('psql -U postgres -d openmaint')">Copy</button>
+
+<h2>Run the command in psql to copy and retrieve the data:</h2>
+<pre id="command6">\copy (SELECT t1."Number", t1."ShortDescr", t1."OpeningDate", t1."ClosureDate", t2."Description", t3."Description", t4."Description", t1."Priority", t1."ProcessStatus", t1."ProcessNotes" FROM "CorrectiveMaint" t1 INNER JOIN "Room" t2 ON t1."Room" = t2."CurrentId" INNER JOIN "Site" t3 ON t1."Site" = t3."CurrentId" INNER JOIN "Team" t4 ON t1."Team" = t4."CurrentId" WHERE "ProcessNotes" IS NOT NULL) TO '/home/pro_notes4.csv' WITH CSV HEADER;</pre>
+<button onclick="copyToClipboard('\\copy (SELECT t1.\"Number\", t1.\"ShortDescr\", t1.\"OpeningDate\", t1.\"ClosureDate\", t2.\"Description\", t3.\"Description\", t4.\"Description\", t1.\"Priority\", t1.\"ProcessStatus\", t1.\"ProcessNotes\" FROM \"CorrectiveMaint\" t1 INNER JOIN \"Room\" t2 ON t1.\"Room\" = t2.\"CurrentId\" INNER JOIN \"Site\" t3 ON t1.\"Site\" = t3.\"CurrentId\" INNER JOIN \"Team\" t4 ON t1.\"Team\" = t4.\"CurrentId\" WHERE \"ProcessNotes\" IS NOT NULL) TO \'/home/pro_notes4.csv\' WITH CSV HEADER;')">Copy</button>
+
+<h2>Exit psql:</h2>
+<pre id="command7">\q</pre>
+<button onclick="copyToClipboard('\\q')">Copy</button>
+
+<h2>Exit Docker:</h2>
+<pre id="command8">exit</pre>
+<button onclick="copyToClipboard('exit')">Copy</button>
+
+<h2>Extract data from Docker to VM:</h2>
+<pre id="command9">sudo docker cp openmaint_db:/home/pro_notes4.csv /home/epadmin</pre>
+<button onclick="copyToClipboard('sudo docker cp openmaint_db:/home/pro_notes4.csv /home/epadmin')">Copy</button>
+
+<h2>Exit VM to your PC:</h2>
+<pre id="command10">exit</pre>
+<button onclick="copyToClipboard('exit')">Copy</button>
+
+<h2>Copy the data from VM to your PC:</h2>
+<pre id="command11">scp -r epadmin@192.168.9.232:/home/epadmin/pro_notes2.csv C:/Users/epuser/Desktop/Script</pre>
+<button onclick="copyToClipboard('scp -r epadmin@192.168.9.232:/home/epadmin/pro_notes2.csv C:/Users/epuser/Desktop/Script')">Copy</button>
+
+<h2>Run Python to convert the file:</h2>
+<pre id="command12">python Conversion_Script.py</pre>
+<button onclick="copyToClipboard('python Conversion_Script.py')">Copy</button>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        alert('Copied to clipboard!');
+    }, function(err) {
+        console.error('Failed to copy: ', err);
+    });
+}
+</script>
+
+</body>
+</html>
